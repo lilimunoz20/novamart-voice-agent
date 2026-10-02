@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NovaMart — Tecnología y bienestar</title>
+<meta name="description" content="NovaMart: electrónica y artículos para el hogar con envíos internacionales y soporte 24/7 con Lili, asistente de voz con IA en español e inglés." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light;
+    --ink:#0b1220;
+    --ink-2:#3b4658;
+    --ink-3:#6b7689;
+    --line:#e6e9f0;
+    --bg:#ffffff;
+    --bg-soft:#f7f8fc;
+    --brand:#4f46e5;
+    --brand-2:#06b6d4;
+    --brand-ink:#3730a3;
+    --grad: linear-gradient(120deg, #4f46e5 0%, #7c3aed 45%, #06b6d4 100%);
+    --radius:18px;
+    --shadow-sm: 0 1px 2px rgba(16,24,40,.05);
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px -8px rgba(16,24,40,.10);
+    --shadow-lg: 0 2px 4px rgba(16,24,40,.04), 0 24px 48px -16px rgba(55,48,163,.22);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+  section{padding:104px 0}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.75);
+    backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid rgba(230,233,240,.7);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.02em}
+  .logo-mark{width:30px;height:30px;border-radius:9px;background:var(--grad);display:grid;place-items:center;color:#fff;font-size:15px;box-shadow:0 4px 12px -2px rgba(79,70,229,.45)}
+  .nav-links{display:flex;align-items:center;gap:32px;font-size:15px;color:var(--ink-2);font-weight:500}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{
+    background:var(--ink);color:#fff;border:0;padding:9px 18px;border-radius:999px;font-size:14px;font-weight:600;
+    transition:transform .2s, box-shadow .2s;
+  }
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 16px -6px rgba(11,18,32,.5)}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;padding:96px 0 112px;
+    background:
+      radial-gradient(60% 60% at 15% 10%, rgba(124,58,237,.10) 0%, transparent 60%),
+      radial-gradient(50% 55% at 90% 20%, rgba(6,182,212,.12) 0%, transparent 60%),
+      radial-gradient(60% 50% at 50% 100%, rgba(79,70,229,.08) 0%, transparent 70%),
+      linear-gradient(180deg,#fbfbff 0%,#ffffff 100%);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(79,70,229,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(79,70,229,.05) 1px,transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(70% 60% at 50% 30%,#000 30%,transparent 80%);
+    -webkit-mask-image:radial-gradient(70% 60% at 50% 30%,#000 30%,transparent 80%);
+  }
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;border-radius:999px;
+    background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm);
+    font-size:13px;font-weight:600;color:var(--ink-2);
+  }
+  .pill .dot{width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,.12);display:grid;place-items:center}
+  .pill .dot::after{content:"";width:8px;height:8px;border-radius:50%;background:#10b981;animation:ping 2s infinite}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(16,185,129,.5)}70%{box-shadow:0 0 0 7px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+  .hero h1{
+    margin:22px 0 20px;font-size:clamp(40px,6vw,68px);line-height:1.04;letter-spacing:-.04em;font-weight:800;
+  }
+  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .sub{font-size:clamp(17px,1.6vw,20px);color:var(--ink-2);max-width:540px;line-height:1.55}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;font-weight:600;font-size:16px;
+    padding:15px 26px;border:0;transition:transform .2s, box-shadow .2s, background .2s;
+  }
+  .btn svg{width:18px;height:18px}
+  .btn-primary{background:var(--grad);color:#fff;box-shadow:0 10px 28px -10px rgba(79,70,229,.7), inset 0 1px 0 rgba(255,255,255,.25)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px -12px rgba(79,70,229,.75), inset 0 1px 0 rgba(255,255,255,.25)}
+  .btn-secondary{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+  .btn-secondary:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:22px;margin-top:36px;font-size:14px;color:var(--ink-3)}
+  .hero-meta span{display:inline-flex;align-items:center;gap:8px}
+  .hero-meta svg{width:16px;height:16px;color:var(--brand)}
+
+  /* Tarjeta de voz del hero */
+  .voice-card{
+    position:relative;background:rgba(255,255,255,.85);border:1px solid rgba(230,233,240,.9);border-radius:24px;
+    padding:24px;box-shadow:var(--shadow-lg);backdrop-filter:blur(8px);
+  }
+  .voice-card::before{
+    content:"";position:absolute;inset:-1px;border-radius:25px;padding:1px;background:var(--grad);opacity:.35;
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
+  }
+  .vc-head{display:flex;align-items:center;gap:12px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .vc-avatar{width:44px;height:44px;border-radius:50%;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:700}
+  .vc-name{font-weight:700;font-size:15px}
+  .vc-status{font-size:13px;color:#059669;font-weight:500}
+  .vc-lang{margin-left:auto;display:flex;gap:6px}
+  .vc-lang span{font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;background:var(--bg-soft);color:var(--ink-2);border:1px solid var(--line)}
+  .bubble{max-width:88%;padding:12px 16px;border-radius:16px;font-size:14.5px;line-height:1.5;margin-top:16px}
+  .bubble.user{margin-left:auto;background:var(--ink);color:#fff;border-bottom-right-radius:6px}
+  .bubble.lili{background:var(--bg-soft);border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:6px}
+  .wave{display:flex;align-items:center;justify-content:center;gap:4px;height:48px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+  .wave i{display:block;width:4px;border-radius:4px;background:var(--grad);animation:wave 1.3s ease-in-out infinite}
+  .wave i:nth-child(1){height:30%;animation-delay:-.1s}.wave i:nth-child(2){height:60%;animation-delay:-.3s}
+  .wave i:nth-child(3){height:90%;animation-delay:-.5s}.wave i:nth-child(4){height:50%;animation-delay:-.7s}
+  .wave i:nth-child(5){height:75%;animation-delay:-.2s}.wave i:nth-child(6){height:40%;animation-delay:-.6s}
+  .wave i:nth-child(7){height:85%;animation-delay:-.4s}.wave i:nth-child(8){height:55%;animation-delay:-.8s}
+  .wave i:nth-child(9){height:35%;animation-delay:-.15s}.wave i:nth-child(10){height:65%;animation-delay:-.45s}
+  .wave i:nth-child(11){height:45%;animation-delay:-.65s}.wave i:nth-child(12){height:25%;animation-delay:-.35s}
+  @keyframes wave{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+
+  /* ---------- Encabezados de sección ---------- */
+  .section-head{max-width:640px;margin:0 auto 56px;text-align:center}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+  .section-head h2{font-size:clamp(30px,4vw,44px);line-height:1.12;letter-spacing:-.03em;font-weight:800;margin:12px 0 14px}
+  .section-head p{font-size:17px;color:var(--ink-2)}
+
+  /* ---------- Qué puede hacer Lili ---------- */
+  .lili{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cap-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+  .cap{
+    grid-column:span 2;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;
+    box-shadow:var(--shadow-sm);transition:transform .25s, box-shadow .25s, border-color .25s;
+  }
+  .cap:nth-child(4){grid-column:2 / span 2}
+  .cap:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:rgba(79,70,229,.25)}
+  .cap-icon{
+    width:48px;height:48px;border-radius:14px;display:grid;place-items:center;margin-bottom:20px;color:var(--brand);
+    background:linear-gradient(135deg,rgba(79,70,229,.10),rgba(6,182,212,.10));border:1px solid rgba(79,70,229,.12);
+  }
+  .cap-icon svg{width:24px;height:24px}
+  .cap h3{font-size:18px;letter-spacing:-.01em;margin-bottom:8px}
+  .cap p{font-size:15px;color:var(--ink-2)}
+  .chip{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:12px;font-weight:600;color:#047857;background:#ecfdf5;border:1px solid #a7f3d0;padding:4px 10px;border-radius:999px}
+  .chip svg{width:13px;height:13px}
+  .powered{text-align:center;margin-top:44px;font-size:14px;color:var(--ink-3)}
+  .powered b{color:var(--ink)}
+
+  /* ---------- Catálogo ---------- */
+  .filters{display:flex;justify-content:center;gap:10px;margin:-24px 0 40px;flex-wrap:wrap;font-size:14px;color:var(--ink-3)}
+  .filters span{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:#fff}
+  .filters i{width:8px;height:8px;border-radius:50%}
+  .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px}
+  .prod{
+    display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow);transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;
+  }
+  .prod:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+  .prod-media{position:relative;aspect-ratio:4/3;background:var(--bg-soft);overflow:hidden}
+  .prod-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+  .prod:hover .prod-media img{transform:scale(1.06)}
+  .badge{
+    position:absolute;top:12px;left:12px;z-index:1;font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:999px;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(6px);box-shadow:var(--shadow-sm);
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .badge i{width:7px;height:7px;border-radius:50%}
+  .badge.elec{color:var(--brand-ink)} .badge.elec i, .filters .elec{background:var(--brand)}
+  .badge.home{color:#0e7490} .badge.home i, .filters .home{background:var(--brand-2)}
+  .tag{position:absolute;top:12px;right:12px;z-index:1;font-size:11px;font-weight:700;padding:5px 10px;border-radius:999px;background:var(--ink);color:#fff}
+  .prod-body{display:flex;flex-direction:column;flex:1;padding:20px}
+  .prod-name{font-weight:700;font-size:16px;letter-spacing:-.01em}
+  .prod-desc{font-size:14px;color:var(--ink-2);margin:8px 0 18px;flex:1}
+  .prod-foot{display:flex;flex-direction:column;align-items:stretch;gap:12px}
+  .price{font-size:20px;font-weight:800;letter-spacing:-.02em}
+  .ask{
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;font-size:13px;font-weight:600;color:var(--brand);
+    background:rgba(79,70,229,.07);border:1px solid rgba(79,70,229,.15);padding:7px 12px;border-radius:999px;transition:background .2s, color .2s;
+  }
+  .ask svg{width:14px;height:14px}
+  .ask:hover{background:var(--brand);color:#fff}
+
+  /* ---------- Envíos ---------- */
+  .shipping{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .ship-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .ship{
+    position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;
+    box-shadow:var(--shadow-sm);transition:transform .25s, box-shadow .25s;
+  }
+  .ship:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .ship.express{background:linear-gradient(160deg,#1e1b4b 0%,#0b1220 100%);color:#fff;border-color:transparent}
+  .ship-region{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+  .express .ship-region{color:#a5b4fc}
+  .ship-price{font-size:40px;font-weight:800;letter-spacing:-.04em;margin:18px 0 2px}
+  .ship-days{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--ink-2);font-weight:500}
+  .express .ship-days{color:#cbd5e1}
+  .ship-days svg{width:16px;height:16px}
+  .ship-bar{height:6px;border-radius:6px;background:var(--line);margin-top:22px;overflow:hidden}
+  .ship-bar b{display:block;height:100%;border-radius:6px;background:var(--grad)}
+  .express .ship-bar{background:rgba(255,255,255,.15)}
+  .free{display:inline-block;margin-top:16px;font-size:12px;font-weight:700;color:#047857;background:#ecfdf5;border:1px solid #a7f3d0;padding:4px 10px;border-radius:999px}
+  .ship-note{text-align:center;margin-top:28px;font-size:14px;color:var(--ink-3)}
+  .returns{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+  .ret{padding:22px;border-radius:var(--radius);background:#fff;border:1px solid var(--line)}
+  .ret b{display:block;font-size:22px;letter-spacing:-.02em}
+  .ret p{font-size:14px;color:var(--ink-2)}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  .faq-item{background:#fff;border:1px solid var(--line);border-radius:16px;transition:border-color .2s, box-shadow .2s}
+  .faq-item:hover{border-color:#cfd5e2}
+  .faq-item.open{box-shadow:var(--shadow);border-color:rgba(79,70,229,.25)}
+  .faq-q{
+    width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;
+    background:none;border:0;padding:22px 24px;font-size:16.5px;font-weight:600;color:var(--ink);
+  }
+  .faq-icon{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--bg-soft);border:1px solid var(--line);transition:transform .3s, background .3s, color .3s}
+  .faq-icon svg{width:14px;height:14px}
+  .faq-item.open .faq-icon{transform:rotate(45deg);background:var(--brand);color:#fff;border-color:var(--brand)}
+  .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+  .faq-item.open .faq-a{grid-template-rows:1fr}
+  .faq-a > div{overflow:hidden}
+  .faq-a p{padding:0 24px 22px;color:var(--ink-2);font-size:15.5px}
+
+  /* ---------- CTA final ---------- */
+  .cta{padding:0 0 104px}
+  .cta-box{
+    position:relative;overflow:hidden;border-radius:28px;padding:64px 32px;text-align:center;color:#fff;
+    background:
+      radial-gradient(50% 80% at 10% 0%, rgba(124,58,237,.55) 0%, transparent 60%),
+      radial-gradient(50% 80% at 100% 100%, rgba(6,182,212,.45) 0%, transparent 60%),
+      #0b1220;
+  }
+  .cta-box h2{font-size:clamp(28px,4vw,42px);letter-spacing:-.03em;line-height:1.15;margin-bottom:14px}
+  .cta-box p{color:#cbd5e1;font-size:17px;max-width:520px;margin:0 auto 32px}
+  .cta-box .btn-primary{background:#fff;color:var(--ink);box-shadow:0 10px 30px -10px rgba(255,255,255,.4)}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center}
+  footer .main{font-size:14.5px;font-weight:600;color:var(--ink-2)}
+  footer .note{font-size:12.5px;color:var(--ink-3);margin-top:6px}
+
+  /* Resalta la burbuja del widget cuando se abre desde un botón */
+  elevenlabs-convai.lili-pulse{animation:lili-pulse 1.2s ease-in-out 2}
+  @keyframes lili-pulse{0%,100%{filter:none}50%{filter:drop-shadow(0 0 18px rgba(79,70,229,.8))}}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:48px}
+    .cap-grid{grid-template-columns:repeat(2,1fr)}
+    .cap, .cap:nth-child(4){grid-column:auto}
+    .cap:nth-child(5){grid-column:1 / -1}
+    .ship-grid{grid-template-columns:repeat(2,1fr)}
+    .returns{grid-template-columns:1fr}
+  }
+  @media (max-width:720px){
+    section{padding:72px 0}
+    .wrap{padding:0 16px}
+    .nav-links a{display:none}
+    .hero{padding:56px 0 72px}
+    .hero-actions .btn{flex:1 1 100%}
+    .cap-grid{grid-template-columns:1fr}
+    .cap:nth-child(5){grid-column:auto}
+    .ship-grid{grid-template-columns:1fr}
+    .prod-grid{grid-template-columns:1fr 1fr;gap:14px}
+    .prod-body{padding:14px}
+    .prod-desc{font-size:13px}
+    .cta{padding-bottom:72px}
+    .cta-box{padding:48px 20px;border-radius:22px}
+  }
+  @media (max-width:420px){
+    .prod-grid{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo"><span class="logo-mark">N</span>NovaMart</a>
+    <nav class="nav-links">
+      <a href="#lili">Lili</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#envios">Envíos</a>
+      <a href="#faq">Preguntas</a>
+      <button type="button" class="nav-cta" data-open-lili>Habla con Lili</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><span class="dot"></span>Soporte con IA · en línea 24/7</span>
+      <h1>Tecnología y bienestar, con soporte que <span class="grad-text">nunca duerme</span></h1>
+      <p class="sub">Electrónica y artículos para el hogar con envíos internacionales. Lili, nuestra asistente de voz con IA, te atiende 24/7 en español e inglés.</p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" data-open-lili>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg>
+          Habla con Lili
+        </button>
+        <a href="#catalogo" class="btn btn-secondary">Ver catálogo</a>
+      </div>
+      <div class="hero-meta">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>Envíos internacionales</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>30 días para devolver</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Verificación de identidad</span>
+      </div>
+    </div>
+
+    <div class="voice-card" aria-hidden="true">
+      <div class="vc-head">
+        <div class="vc-avatar">L</div>
+        <div>
+          <div class="vc-name">Lili · NovaMart</div>
+          <div class="vc-status">● Escuchando</div>
+        </div>
+        <div class="vc-lang"><span>ES</span><span>EN</span></div>
+      </div>
+      <div class="bubble user">Tengo un gato y algo de alergias, ¿qué me recomiendas?</div>
+      <div class="bubble lili">Te va muy bien el Nova Air Purifier 300: filtro HEPA H13 y modo nocturno de solo 24 dB, por ciento ochenta y nueve dólares.</div>
+      <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</section>
+
+<section id="lili" class="lili">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Asistente de voz</span>
+      <h2>¿Qué puede hacer Lili?</h2>
+      <p>Resuelve en una sola llamada lo que más nos piden, y te pasa con una persona cuando hace falta.</p>
+    </div>
+    <div class="cap-grid">
+      <div class="cap">
+        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div>
+        <h3>Consultar el estado de tu pedido</h3>
+        <p>Estado, artículos y fecha estimada de entrega con solo tu número de pedido.</p>
+      </div>
+      <div class="cap">
+        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div>
+        <h3>Explicar políticas de envío y devolución</h3>
+        <p>Tiempos y costos por región, la ventana de 30 días y qué productos aplican.</p>
+      </div>
+      <div class="cap">
+        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg></div>
+        <h3>Recomendar productos del catálogo</h3>
+        <p>Te pregunta para qué lo quieres y te sugiere opciones reales, con precio.</p>
+      </div>
+      <div class="cap">
+        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>Cambiar tu dirección de envío</h3>
+        <p>Solo después de confirmar que eres tú. Sin verificación, el cambio no es posible.</p>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Con verificación de identidad</span>
+      </div>
+      <div class="cap">
+        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div>
+        <h3>Conectarte con un asesor humano</h3>
+        <p>Cuando lo pides o el caso lo necesita, te transfiere con una persona del equipo.</p>
+      </div>
+    </div>
+    <p class="powered">Powered by <b>ElevenLabs Conversational AI</b></p>
+  </div>
+</section>
+
+<section id="catalogo">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Catálogo</span>
+      <h2>Diez productos, elegidos con cuidado</h2>
+      <p>Los mismos que Lili conoce, con los mismos precios.</p>
+    </div>
+    <div class="filters"><span><i class="elec"></i>Electrónica</span><span><i class="home"></i>Wellness &amp; Hogar</span></div>
+
+    <div class="prod-grid">
+      <article class="prod">
+        <div class="prod-media"><span class="badge elec"><i></i>Electrónica</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=70" alt="Nova Headphones X1"></div>
+        <div class="prod-body">
+          <div class="prod-name">Nova Headphones X1</div>
+          <p class="prod-desc">Cancelación activa de ruido, 35 h de batería y carga rápida USB-C (10 min = 5 h).</p>
+          <div class="prod-foot"><span class="price">$149.00</span><button type="button" class="ask" data-open-lili><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>Preguntar a Lili</button></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod-media"><span class="badge elec"><i></i>Electrónica</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&auto=format&fit=crop&q=70" alt="Nova Earbuds Lite"></div>
+        <div class="prod-body">
+          <div class="prod-name">Nova Earbuds Lite</div>
+          <p class="prod-desc">Inalámbricos, resistentes al sudor (IPX4), 24 h con estuche y controles táctiles.</p>
+          <div class="prod-foot"><span class="price">$59.00</span><button type="button" class="ask" data-open-lili><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>Preguntar a Lili</button></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod-media"><span class="badge elec"><i></i>Electrónica</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=70" alt="Nova Smart Speaker Mini"></div>
+        <div class="prod-body">
+          <div class="prod-name">Nova Smart Speaker Mini</div>
+          <p class="prod-desc">Asistente de voz, sonido 360°, Wi-Fi + Bluetooth y emparejamiento multi-habitación.</p>
+          <div class="prod-foot"><span class="price">$79.00</span><button type="button" class="ask" data-open-lili><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>Preguntar a Lili</button></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod-media"><span class="badge elec"><i></i>Electrónica</span><span class="tag">Bestseller</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1545454675-3531b543be5d?w=500&auto=format&fit=crop&q=70" alt="Nova Smart Speaker Max"></div>
+        <div class="prod-body">
+          <div class="prod-name">Nova Smart Speaker Max</div>
+          <p class="prod-desc">Estéreo envolvente, subwoofer integrado, hub de casa inteligente y pantalla de 7".</p>
+          <div class="prod-foot"><span class="price">$199.00</span><button type="button" class="ask" data-open-lili><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>Preguntar a Lili</button></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod-media"><span class="badge elec"><i></i>Electrónica</span><span class="tag">Nuevo</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=70" alt="Nova Tab 10"></div>
+        <div class="prod-body">
+          <div class="prod-name">Nova Tab 10</div>
+          <p class="prod-desc">Pantalla de 10.4", 128 GB, 12 h de batería y compatible con stylus.</p>
+          <div class="prod-foot"><span class="price">$329.00</span><button type="button" class="ask" data-open-lili><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>Preguntar a Lili</button></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod-media"><span class="badge elec"><i></i>Electrónica</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1585995603413-eb35b5f4a50b?w=500&auto=format&fit=crop&q=70" alt="Nova PowerBank 20K"></div>
+        <div class="prod-body">
+          <div class="prod-name">Nova PowerBank 20K</div>
+          <p class="prod-desc">20,000 mAh, 2× USB-C + 1× USB-A y carga de laptop a 65 W.</p>
+          <div class="prod-foot"><span class="price">$39.00</span><button type="button" class="ask" data-open-lili><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>Preguntar a Lili</button></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod-media"><span class="badge home"><i></i>Wellness &amp; Hogar</span><span class="tag">Bestseller</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1632928274371-878938e4d825?w=500&auto=format&fit=crop&q=70" alt="Nova Air Purifier 300"></div>
+        <div class="prod-body">
+          <div class="prod-name">Nova Air Purifier 300</div>
+          <p class="prod-desc">Filtro HEPA H13, cubre hasta 28 m² y modo nocturno silencioso (24 dB).</p>
+          <div class="prod-foot"><span class="price">$189.00</span><button type="button" class="ask" data-open-lili><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>Preguntar a Lili</button></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod-media"><span class="badge home"><i></i>Wellness &amp; Hogar</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&auto=format&fit=crop&q=70" alt="Nova Robot Vacuum S"></div>
+        <div class="prod-body">
+          <div class="prod-name">Nova Robot Vacuum S</div>
+          <p class="prod-desc">Mapeo LiDAR, 120 min de autonomía, programación por app y listo para auto-vaciado.</p>
+          <div class="prod-foot"><span class="price">$249.00</span><button type="button" class="ask" data-open-lili><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>Preguntar a Lili</button></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod-media"><span class="badge home"><i></i>Wellness &amp; Hogar</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1604414499020-f9ac575bc5ec?w=500&auto=format&fit=crop&q=70" alt="Nova Cookware Set 10 pzas"></div>
+        <div class="prod-body">
+          <div class="prod-name">Nova Cookware Set 10 pzas</div>
+          <p class="prod-desc">Acero inoxidable tri-ply, compatible con inducción y apto para horno hasta 260 °C.</p>
+          <div class="prod-foot"><span class="price">$129.00</span><button type="button" class="ask" data-open-lili><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>Preguntar a Lili</button></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod-media"><span class="badge home"><i></i>Wellness &amp; Hogar</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&auto=format&fit=crop&q=70" alt="Nova Linen Bedding Set (Queen)"></div>
+        <div class="prod-body">
+          <div class="prod-name">Nova Linen Bedding Set (Queen)</div>
+          <p class="prod-desc">100% lino lavado a la piedra, funda nórdica + 2 fundas de almohada, en 4 colores.</p>
+          <div class="prod-foot"><span class="price">$99.00</span><button type="button" class="ask" data-open-lili><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>Preguntar a Lili</button></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="envios" class="shipping">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Envíos</span>
+      <h2>Llegamos a donde estés</h2>
+      <p>Tarifas claras por región, en dólares.</p>
+    </div>
+    <div class="ship-grid">
+      <div class="ship">
+        <div class="ship-region">Norteamérica</div>
+        <div class="ship-price">$5.99</div>
+        <div class="ship-days"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>5–7 días</div>
+        <div class="ship-bar"><b style="width:50%"></b></div>
+        <span class="free">Gratis sobre $50</span>
+      </div>
+      <div class="ship">
+        <div class="ship-region">Latinoamérica</div>
+        <div class="ship-price">$19.99</div>
+        <div class="ship-days"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>7–14 días</div>
+        <div class="ship-bar"><b style="width:100%"></b></div>
+      </div>
+      <div class="ship">
+        <div class="ship-region">Europa</div>
+        <div class="ship-price">$24.99</div>
+        <div class="ship-days"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>7–14 días</div>
+        <div class="ship-bar"><b style="width:100%"></b></div>
+      </div>
+      <div class="ship express">
+        <div class="ship-region">Exprés · Norteamérica</div>
+        <div class="ship-price">$14.99</div>
+        <div class="ship-days"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>2 días hábiles</div>
+        <div class="ship-bar"><b style="width:15%"></b></div>
+      </div>
+    </div>
+    <p class="ship-note">¿Envías al resto del mundo? Lili te conecta con un asesor para cotizarlo.</p>
+
+    <div class="returns">
+      <div class="ret"><b>30 días</b><p>para devolver desde la entrega, con recibo o número de pedido.</p></div>
+      <div class="ret"><b>5–7 días hábiles</b><p>para tu reembolso, tras recibir e inspeccionar el producto.</p></div>
+      <div class="ret"><b>Envío de devolución</b><p>gratis si llegó defectuoso o incorrecto; si no, se descuentan $6.95.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2>Lo que más nos preguntan</h2>
+      <p>¿No encuentras tu respuesta? Lili te ayuda al instante.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">¿Cuánto tarda y cuánto cuesta el envío?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><div><p>Norteamérica (EE. UU., Canadá, México): 5–7 días por $5.99, gratis en pedidos sobre $50. Latinoamérica (Brasil, Argentina, Colombia, Chile): 7–14 días por $19.99. Europa (España, Portugal, Francia, Alemania): 7–14 días por $24.99. Exprés en Norteamérica: 2 días hábiles por $14.99. Para el resto del mundo, un asesor te cotiza. Puedes cambiar la dirección mientras el pedido esté "en procesamiento", tras verificar tu identidad.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">¿Qué garantía tienen los productos?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><div><p>Electrónica: 1 año de garantía limitada del fabricante desde la entrega, contra defectos de fábrica (no daños accidentales). Artículos para el hogar: 90 días contra defectos de fabricación. Los reclamos de garantía los atiende un especialista; Lili te transfiere.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">¿Qué métodos de pago aceptan?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><div><p>Visa, Mastercard, American Express, Discover, PayPal, Apple Pay, Google Pay y tarjetas de regalo NovaMart. Por seguridad, nunca te pedimos el número completo de tu tarjeta por teléfono.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">¿Cuál es el horario de soporte?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><div><p>Lili está disponible las 24 horas, los 7 días. El soporte humano atiende de lunes a viernes de 8:00 a 20:00 y sábados de 9:00 a 17:00 (hora del Este de EE. UU.); domingos cerrado. NovaMart es 100% en línea, sin tiendas físicas.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">¿Cómo funcionan las devoluciones?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><div><p>Tienes 30 días desde la entrega, con recibo o número de pedido, y el producto completo con su empaque. No aplica a electrónica abierta (salvo defecto, que cubre la garantía), artículos de venta final ni ropa de cama abierta. El reembolso llega en 5–7 días hábiles a tu método de pago original.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>¿Tienes una pregunta? Lili te contesta ahora.</h2>
+      <p>Por voz, en español o inglés, a cualquier hora.</p>
+      <button type="button" class="btn btn-primary" data-open-lili>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg>
+        Habla con Lili
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="main">NovaMart 2026 — Powered by ElevenLabs Conversational AI</div>
+    <div class="note">Tienda ficticia creada para demostración</div>
+  </div>
+</footer>
+
+<script>
+  // ---------- FAQ: acordeón ----------
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.parentElement, wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(o){
+        o.classList.remove('open'); o.querySelector('.faq-q').setAttribute('aria-expanded','false');
+      });
+      if(!wasOpen){ item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+
+  // ---------- Abrir el widget de Lili ----------
+  // El widget no publica una API para abrirse, así que probamos métodos conocidos,
+  // luego el primer botón de su interfaz, y siempre resaltamos la burbuja.
+  function openLili(){
+    var el = document.querySelector('elevenlabs-convai');
+    if(!el) return;
+    try {
+      var ms = ['startCall','open','expand','show'], done = false;
+      for (var i = 0; i < ms.length && !done; i++) {
+        if (typeof el[ms[i]] === 'function') { el[ms[i]](); done = true; }
+      }
+      if (!done && el.shadowRoot) {
+        var b = el.shadowRoot.querySelector('button, [role="button"]');
+        if (b) b.click();
+      }
+    } catch(e){}
+    el.classList.add('lili-pulse');
+    setTimeout(function(){ el.classList.remove('lili-pulse'); }, 2500);
+  }
+  document.querySelectorAll('[data-open-lili]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if (window.customElements) customElements.whenDefined('elevenlabs-convai').then(openLili);
+    });
+  });
+</script>
+
+<elevenlabs-convai agent-id="agent_2701m3a0yhwtfccafkgwm2vrz76n"></elevenlabs-convai>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+</body>
+</html>

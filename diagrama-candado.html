@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Candado de Verificación</title>
+<style>
+  :root{
+    --ink:#0f1f2e; --soft:#5a6b7d; --line:#cfd9e2; --bg:#f6f9fc; --card:#fff;
+    --blue:#2792dc; --aqua:#5fd2d2; --green:#17a673; --amber:#e8930c; --red:#e05260;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);padding:40px 24px}
+  .wrap{max-width:1080px;margin:0 auto}
+  h1{font-size:1.9rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+  .sub{color:var(--soft);font-size:1rem;margin-bottom:28px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:28px;font-size:.84rem}
+  .lg{display:flex;align-items:center;gap:7px}
+  .dot{width:13px;height:13px;border-radius:4px}
+  .flow{display:flex;flex-direction:column;align-items:center;gap:0}
+  .box{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:13px 20px;
+       text-align:center;min-width:280px;box-shadow:0 2px 10px -4px rgba(15,31,46,.16)}
+  .box .t{font-weight:700;font-size:.97rem}
+  .box .s{font-size:.78rem;color:var(--soft);margin-top:3px}
+  .b-state{border-color:var(--aqua);background:#f0fbfb}
+  .b-agent{border-color:var(--blue);background:#f2f9fe}
+  .b-tool{border-color:var(--amber);background:#fff9ee}
+  .b-lock{border-color:var(--green);background:#eefaf5;border-width:3px;min-width:360px}
+  .b-fail{border-color:var(--red);background:#fef2f3}
+  .arrow{width:2px;height:24px;background:var(--line);position:relative}
+  .arrow::after{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);
+    border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid var(--line)}
+  .tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:999px;margin:6px 0}
+  .t-det{background:#dff3ea;color:#0d6b4a;border:1px solid #9fd9c3}
+  .t-llm{background:#e6f1fb;color:#185b8a;border:1px solid #a9cdea}
+  .split{display:flex;gap:36px;align-items:flex-start;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .col{display:flex;flex-direction:column;align-items:center}
+  .branchlbl{font-size:.8rem;color:var(--soft);font-weight:600;margin-bottom:8px}
+  .note{background:#eefaf5;border-left:4px solid var(--green);padding:14px 18px;border-radius:0 10px 10px 0;
+        margin-top:34px;font-size:.9rem;line-height:1.55}
+  .note b{color:#0d6b4a}
+  .stats{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 18px;flex:1;min-width:150px}
+  .stat .n{font-size:1.5rem;font-weight:800;color:var(--blue)}
+  .stat .l{font-size:.76rem;color:var(--soft);margin-top:2px}
+  @media(max-width:700px){.split{gap:14px}.box{min-width:230px}.b-lock{min-width:260px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Candado de verificación &mdash; NovaMart / Lili</h1>
+  <p class="sub">La herramienta de cambio de dirección existe en un solo nodo. No hay forma de llegar sin verificación exitosa en la misma llamada.</p>
+
+  <div class="legend">
+    <span class="lg"><span class="dot" style="background:var(--aqua)"></span>Memoria (guarda datos)</span>
+    <span class="lg"><span class="dot" style="background:var(--blue)"></span>Lili conversando</span>
+    <span class="lg"><span class="dot" style="background:var(--amber)"></span>Herramienta (no habla)</span>
+    <span class="lg"><span class="dot" style="background:var(--green)"></span>Nodo privilegiado</span>
+    <span class="lg"><span class="dot" style="background:var(--red)"></span>Fallo / reintento</span>
+  </div>
+
+  <div class="flow">
+    <div class="box b-state"><div class="t">Inicializar</div><div class="s">intentos = 0 &middot; verificado = false</div></div>
+    <div class="arrow"></div>
+    <div class="box b-agent"><div class="t">Router principal (Lili)</div><div class="s">identifica qué necesita el cliente</div></div>
+    <div class="arrow"></div>
+    <span class="tag t-llm">el modelo detecta: quiere cambiar su dirección</span>
+    <div class="arrow"></div>
+    <div class="box b-state"><div class="t">¿Ya verificado en esta llamada?</div></div>
+
+    <div class="split">
+      <div class="col">
+        <div class="branchlbl">NO &mdash; verificación completa</div>
+        <div class="arrow"></div>
+        <div class="box b-agent"><div class="t">Pedir número de cuenta</div></div>
+        <div class="arrow"></div>
+        <div class="box b-agent"><div class="t">Pedir código postal</div></div>
+        <div class="arrow"></div>
+        <div class="box b-tool"><div class="t">verify_identity</div><div class="s">se ejecuta sola, no habla</div></div>
+        <div class="arrow"></div>
+        <span class="tag t-det">expression: success = true</span>
+      </div>
+      <div class="col">
+        <div class="branchlbl">SÍ &mdash; atajo seguro</div>
+        <div class="arrow"></div>
+        <div class="box b-state"><div class="t">Verificado antes<br>en esta misma llamada</div><div class="s">no se le piden datos otra vez</div></div>
+        <div class="arrow"></div>
+        <span class="tag t-det">expression: identity_verified = true</span>
+      </div>
+    </div>
+
+    <div class="arrow"></div>
+    <div class="box b-lock">
+      <div class="t">🔒 Cambio de dirección (privilegiado)</div>
+      <div class="s">ÚNICO nodo con <code>update_shipping_address</code><br>Hace read-back y espera confirmación explícita</div>
+    </div>
+  </div>
+
+  <div style="margin-top:36px">
+    <div class="branchlbl" style="text-align:center;margin-bottom:10px">Si la verificación falla</div>
+    <div class="flow">
+      <div class="box b-fail"><div class="t">Sumar intento fallido</div><div class="s">intentos + 1</div></div>
+      <div class="split" style="margin-top:14px">
+        <div class="col">
+          <span class="tag t-det">expression: intentos &lt; 3</span>
+          <div class="arrow"></div>
+          <div class="box b-agent"><div class="t">Reintentar</div><div class="s">vuelve a pedir los datos</div></div>
+        </div>
+        <div class="col">
+          <span class="tag t-det">expression: intentos ≥ 3</span>
+          <div class="arrow"></div>
+          <div class="box b-tool"><div class="t">transfer_to_number</div><div class="s">intenta pasar con una persona</div></div>
+          <div class="arrow"></div>
+          <span class="tag t-det">result: falla en canal web</span>
+          <div class="arrow"></div>
+          <div class="box b-agent"><div class="t">Fallback natural</div><div class="s">se disculpa, invita a intentar más tarde</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">19</div><div class="l">nodos en el workflow</div></div>
+    <div class="stat"><div class="n">36</div><div class="l">conexiones</div></div>
+    <div class="stat"><div class="n">2</div><div class="l">entradas al privilegiado, ambas deterministas</div></div>
+    <div class="stat"><div class="n">35/36</div><div class="l">tests pasando</div></div>
+  </div>
+
+  <div class="note">
+    <b>Por qué es estructural y no una regla del prompt:</b> la herramienta <code>update_shipping_address</code> no está asignada a ningún otro nodo del sistema.
+    No es que el prompt diga &laquo;no la uses antes de verificar&raquo; &mdash; es que en los demás nodos <b>no existe</b>.
+    Las dos entradas al nodo privilegiado usan <b>expression edges</b>: leen el resultado real de la herramienta, no la interpretación del modelo.
+  </div>
+</div>
+</body>
+</html>
